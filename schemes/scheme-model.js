@@ -10,7 +10,13 @@ function findById(id) {
     .first();
 }
 
+function add(scheme) {
+  return db('schemes')
+    .insert(scheme)
+}
+
 module.exports = {
   find,
-  findById
+  findById,
+  add
 }
