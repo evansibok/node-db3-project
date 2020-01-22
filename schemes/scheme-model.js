@@ -21,9 +21,16 @@ function update(id, changes) {
     .update(changes)
 }
 
+function remove(id) {
+  return db('schemes')
+    .where({ id })
+    .del()
+}
+
 module.exports = {
   find,
   findById,
   add,
-  update
+  update,
+  remove
 }
