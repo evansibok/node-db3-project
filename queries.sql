@@ -14,11 +14,28 @@ select
     companyname company_name,
     o.orderdate order_date
 from [order] o
-join shipper s
+left join shipper s
 on o.shipvia = s.id
 where o.orderdate < "2012-08-09"
 order by o.orderdate desc;
 
 -- Display the name and quantity of the products ordered in order with Id 10251. Sort by ProductName. Shows 3 records.
+select
+    p.productname product_name,
+    o.quantity product_quantity_ordered
+from product p
+join orderdetail o
+on p.id = o.productid
+where o.orderid is 10251
+group by product_name;
 
 -- Display the OrderID, Customer's Company Name and the employee's LastName for every order. All columns should be labeled clearly. Displays 16,789 records.
+select
+    o.id order_id,
+    c.companyname customer_company_name,
+    e.lastname employee_lastname
+from [order] o
+join customer c
+on o.customerid = c.id
+join employee e
+on o.employeeid = e.id;
