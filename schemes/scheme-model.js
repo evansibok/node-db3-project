@@ -27,10 +27,23 @@ function remove(id) {
     .del()
 }
 
+function findSteps(scheme_id) {
+
+  return db.select('steps.id',
+    'step_number',
+    'instructions',
+    'schemes.scheme_name')
+    .from('steps')
+    .innerJoin('schemes', 'steps.scheme_id', 'schemes.id')
+    .where({ scheme_id })
+    .then(steps => steps)
+}
+
 module.exports = {
   find,
   findById,
   add,
   update,
-  remove
+  remove,
+  findSteps
 }

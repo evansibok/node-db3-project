@@ -17,10 +17,11 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 
+  // Error Scheme returns an empty array when the scheme doesn't exist
   Schemes.findById(id)
   .then(scheme => {
     if (scheme) {
-      res.json(scheme);
+      res.json(scheme); 
     } else {
       res.status(404).json({ message: 'Could not find scheme with given id.' })
     }
@@ -35,7 +36,7 @@ router.get('/:id/steps', (req, res) => {
 
   Schemes.findSteps(id)
   .then(steps => {
-    if (steps.length) {
+    if (steps) {
       res.json(steps);
     } else {
       res.status(404).json({ message: 'Could not find steps for given scheme' })
